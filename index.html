@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XVII-17 | Web Design & Development</title>
+  <style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      background: linear-gradient(to right, rgba(122, 121, 121, 0), rgba(120, 119, 119, 0)),
+                  url('https://img.freepik.com/premium-photo/old-paper-texture-black-blood-red-background_730620-38551.jpg') 
+                  no-repeat center center/cover;
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(0,0,0,0.7);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
+    }
+
+    header img {
+      height: 60px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #ff0000; }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      color: #ff0000;
+    }
+    .hero p {
+      font-size: 1.5rem;
+      margin-top: 15px;
+      color: #f2f2f2;
+    }
+    .hero button {
+      margin-top: 30px;
+      padding: 15px 40px;
+      background: #ff0000;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .hero button:hover { background: #cc0000; }
+
+    section {
+      padding: 80px 10%;
+      background: rgba(0,0,0,0.75);
+    }
+    section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #ff0000;
+      text-align: center;
+    }
+
+    .services, .portfolio, .contact {
+      display: grid;
+      gap: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 15px;
+      transition: transform 0.3s;
+    }
+    .card:hover { transform: translateY(-5px); }
+
+    .card h3 { color: #ff0000; margin-bottom: 10px; }
+    .card p { color: #ddd; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>XVII-17</h1>
+    <p>Modern Web Design & Development Solutions</p>
+    <button onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+      Explore Services
+    </button>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="card">
+        <h3>Starter Website</h3>
+        <p>1–3 pages | R2,500 – R4,000</p>
+      </div>
+      <div class="card">
+        <h3>Business Website</h3>
+        <p>5–7 pages, SEO ready | R6,000 – R9,000</p>
+      </div>
+      <div class="card">
+        <h3>E-Commerce</h3>
+        <p>Online store, payment gateway | R18,000 – R25,000</p>
+      </div>
+      <div class="card">
+        <h3>Custom Solutions</h3>
+        <p>Tailored web experiences to your needs</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <h2>Portfolio</h2>
+    <div class="portfolio">
+      <div class="card"><p>🚀 Project Showcase Coming Soon</p></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <div class="contact">
+      <div class="card">
+        <p>📧 xviiventures@gmail.com</p>
+        <p>📞 +27 061 536 6792</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2024 XVII-17 | Web Design & Development
+  </footer>
+</body>
+</html>
