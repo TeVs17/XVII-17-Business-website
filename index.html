@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -11,7 +11,7 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: white;
-      background: linear-gradient(to right, rgba(122, 121, 121, 0), rgba(120, 119, 119, 0)),
+      background: linear-gradient(to right, rgba(122,121,121,0), rgba(120,119,119,0)),
                   url('https://img.freepik.com/premium-photo/old-paper-texture-black-blood-red-background_730620-38551.jpg') 
                   no-repeat center center/cover;
       background-attachment: fixed;
@@ -29,10 +29,12 @@
       top: 0;
       z-index: 1000;
       backdrop-filter: blur(6px);
+      animation: slideDown 1s ease forwards;
     }
 
-    header img {
-      height: 60px;
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     nav ul {
@@ -61,12 +63,34 @@
     .hero h1 {
       font-size: 4rem;
       color: #ff0000;
+      animation: fadeInDown 2s ease forwards;
     }
-    .hero p {
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .typing {
+      border-right: 2px solid #fff;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(30,end) forwards, blink 0.7s step-end infinite;
       font-size: 1.5rem;
-      margin-top: 15px;
       color: #f2f2f2;
+      margin-top: 15px;
     }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 35% }
+    }
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
     .hero button {
       margin-top: 30px;
       padding: 15px 40px;
@@ -77,12 +101,19 @@
       font-size: 1.2rem;
       cursor: pointer;
       transition: 0.3s;
+      animation: bounce 2s infinite;
     }
     .hero button:hover { background: #cc0000; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
 
     section {
       padding: 80px 10%;
       background: rgba(0,0,0,0.75);
+      animation: fadeUp 1s ease forwards;
     }
     section h2 {
       font-size: 2.5rem;
@@ -91,18 +122,39 @@
       text-align: center;
     }
 
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .services, .portfolio, .contact {
       display: grid;
       gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 
     .card {
       background: rgba(255,255,255,0.05);
       padding: 20px;
       border-radius: 15px;
-      transition: transform 0.3s;
+      transition: transform 0.4s, box-shadow 0.4s;
+      animation: fadeIn 1.5s ease forwards;
     }
-    .card:hover { transform: translateY(-5px); }
+    .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
 
     .card h3 { color: #ff0000; margin-bottom: 10px; }
     .card p { color: #ddd; }
@@ -113,6 +165,25 @@
       background: #111;
       color: #aaa;
       font-size: 0.9rem;
+    }
+
+    /* Floating WhatsApp button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      animation: pulse 2s infinite;
+    }
+    .whatsapp-float img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
@@ -129,7 +200,7 @@
 
   <section class="hero">
     <h1>XVII-17</h1>
-    <p>Modern Web Design & Development Solutions</p>
+    <p class="typing">Modern Web Design & Development Solutions</p>
     <button onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
       Explore Services
     </button>
@@ -160,7 +231,22 @@
   <section id="portfolio">
     <h2>Portfolio</h2>
     <div class="portfolio">
-      <div class="card"><p>🚀 Project Showcase Coming Soon</p></div>
+      <div class="card">
+        <img src="https://ts2.mm.bing.net/th?id=OIP.8iX4ahs9E1FfvxxNW4YyLQHaEr&pid=15.1" alt="Website Project">
+        <h3>Website Project</h3>
+      </div>
+      <div class="card">
+        <img src="https://thaka.bing.com/th/id/OIP.Jv8wYA-DHQCBGr6lOaMeJAHaEK?w=284&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="E-Commerce Store">
+        <h3>E-Commerce Store</h3>
+      </div>
+      <div class="card">
+        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/1aab28101598095.5f225820c88b4.png" alt="Mobile App UI">
+        <h3>Mobile App UI</h3>
+      </div>
+      <div class="card">
+        <img src="https://s3-alpha.figma.com/hub/file/4724852826/02e95015-7898-420a-9f55-5bba9df58025-cover.png" alt="SaaS Dashboard">
+        <h3>SaaS Dashboard</h3>
+      </div>
     </div>
   </section>
 
@@ -177,5 +263,10 @@
   <footer>
     © 2024 XVII-17 | Web Design & Development
   </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/27615366792" class="whatsapp-float" target="_blank">
+    <img src="https://thaka.bing.com/th/id/OIP.95AioEK2mw9lEDZutjLCegHaHa?w=179&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="WhatsApp">
+  </a>
 </body>
 </html>
