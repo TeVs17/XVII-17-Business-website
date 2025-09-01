@@ -5,41 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>XVII-17 | Web Design & Development</title>
   <style>
-    /* ====== RESET ====== */
     * {margin:0; padding:0; box-sizing:border-box;}
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color:#fff;
-      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      background: 
+        linear-gradient(135deg, rgba(0,0,0,0.85), rgba(50,0,0,0.85)),
+        url('https://img.freepik.com/premium-photo/old-paper-texture-black-blood-red-background_730620-38551.jpg') no-repeat center center/cover;
       overflow-x:hidden;
       position:relative;
+      text-align:center;
     }
     h1,h2,h3 {font-weight:700;}
     p {line-height:1.6;}
 
-    /* ====== BACKGROUND ANIMATION ====== */
-    body::before, body::after {
+    /* Animated gradient overlay */
+    body::before {
+      content:"";
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: linear-gradient(270deg, #a11515, #000000, #222222);
+      background-size: 600% 600%;
+      animation: gradientShift 5s ease infinite;
+      z-index:-1;
+      opacity:0.35;
+    }
+    @keyframes gradientShift {
+      0% { background-position:0% 50%; }
+      50% { background-position:100% 50%; }
+      100% { background-position:0% 50%; }
+    }
+
+    /* Floating shapes */
+    body::after {
       content:"";
       position:fixed;
       width:400px;
       height:400px;
-      background: radial-gradient(circle, rgba(0,255,0,0.15), transparent);
-      border-radius:50%;
-      animation: float 10s infinite alternate;
-      z-index:-1;
-    }
-    body::after {
       right:10%;
       top:20%;
-      background: radial-gradient(circle, rgba(0,128,255,0.15), transparent);
-      animation-duration:12s;
+      background: radial-gradient(circle, rgba(0,0,0,0.15), transparent);
+      border-radius:50%;
+      animation: float 5s infinite alternate;
+      z-index:-1;
     }
     @keyframes float {
-      from {transform:translateY(0px);}
+      from {transform:translateY(0);}
       to {transform:translateY(50px);}
     }
 
-    /* ====== HEADER & NAV ====== */
     header {
       display:flex;
       justify-content:center;
@@ -60,14 +75,26 @@
     }
     nav a:hover { color:#ff0000; }
 
-    /* ====== HERO ====== */
     .hero {
       text-align:center;
       padding:120px 20px 60px;
     }
-    .hero h1 { font-size:3rem; color:rgb(255, 255, 255); margin-bottom:20px; }
-    .hero p { font-size:1.2rem; color:#ccc; margin-bottom:40px; }
+    .hero h1 { font-size:3rem; color:#ff0000; margin-bottom:20px; }
+
+    /* Typing animation */
+    .hero .typing {
+      display:inline-block;
+      white-space:nowrap;
+      overflow:hidden;
+      font-size:1.2rem;
+      color:#fff;
+      margin-bottom:40px;
+      max-width:90%;
+    }
+
     .cta-btn {
+      display:block;
+      margin:0 auto 20px auto;
       background:linear-gradient(45deg, red, black);
       color:#000;
       padding:15px 40px;
@@ -76,21 +103,20 @@
       font-size:1rem;
       font-weight:bold;
       cursor:pointer;
-      transition:transform 0.3s, box-shadow 0.3s;
+      transition:transform 1s, box-shadow 0.3s;
     }
     .cta-btn:hover {
       transform:scale(1.05);
       box-shadow:0 0 20px red;
     }
 
-    /* ====== ABOUT US ====== */
-    .about h2 {
+    .about h2, .services h2, .gallery h2 {
       text-align:center;
       font-size:2.5rem;
       margin-bottom:20px;
       color:silver;
     }
-    .about p {
+    .about p, .services p {
       max-width:800px;
       margin:auto;
       font-size:1.1rem;
@@ -98,14 +124,7 @@
       color:#ddd;
     }
 
-    /* ====== SERVICES ====== */
-    .services h2 {
-      text-align:center;
-      font-size:2.5rem;
-      margin-bottom:40px;
-      color:silver;
-    }
-    .services-grid {
+    .services-grid, .gallery .grid {
       display:grid;
       grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
       gap:25px;
@@ -126,48 +145,14 @@
     .card p { color:#ddd; }
     .card img { width:100%; border-radius:10px; margin-bottom:15px; }
 
-    /* ====== CONTACT ====== */
-    .contact h2 {
+    /* Contact info at bottom */
+    #contact {
       text-align:center;
-      font-size:2.5rem;
-      margin-bottom:20px;
-      color:silver;
-    }
-    .contact form {
-      max-width:600px;
-      margin:auto;
-      display:flex;
-      flex-direction:column;
-      gap:15px;
-    }
-    .contact input, .contact textarea {
-      padding:15px;
-      border:none;
-      border-radius:10px;
+      margin:60px 0;
       font-size:1rem;
-    }
-    .contact button {
-      background:linear-gradient(45deg, rgb(255, 0, 0), #000000);
-      color:#000;
-      padding:15px;
-      border:none;
-      border-radius:30px;
-      font-size:1rem;
-      font-weight:bold;
-      cursor:pointer;
-      transition:transform 0.3s, box-shadow 0.3s;
-    }
-    .contact button:hover {
-      transform:scale(1.05);
-      box-shadow:0 0 15px red;
-    }
-    .contact-info {
-      text-align:center;
-      margin-top:30px;
       color:#ccc;
     }
 
-    /* ====== FOOTER ====== */
     footer {
       text-align:center;
       padding:20px;
@@ -176,7 +161,6 @@
       font-size:0.9rem;
     }
 
-    /* ====== WhatsApp Floating Button ====== */
     .whatsapp-float {
       position:fixed;
       bottom:20px;
@@ -195,55 +179,65 @@
       100%{transform:scale(1);}
     }
 
-    /* ====== RESPONSIVE ====== */
     @media (max-width:768px) {
       .hero h1 { font-size:2.2rem; }
-      .hero p { font-size:1rem; }
+      .hero .typing { font-size:1rem; }
       section {padding:60px 15px;}
     }
     @media (max-width:480px) {
       nav ul { flex-direction:column; align-items:center; gap:10px; }
       .hero h1 { font-size:1.8rem; }
-      .hero p { font-size:0.9rem; }
+      .hero .typing { font-size:0.9rem; }
       .cta-btn { padding:12px 25px; font-size:0.9rem; }
-      .services-grid, .portfolio-grid { grid-template-columns:1fr; }
+      .services-grid, .gallery .grid { grid-template-columns:1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <nav>
       <ul>
         <li><a href="#services">Services</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
     <h1>XVII-17</h1>
-    <p>Modern Web Design & Development Solutions</p>
+    <p class="typing" id="typing"></p>
     <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
       Get in Touch
     </button>
   </section>
 
-  <!-- ABOUT US -->
-  <section class="about">
-    <h2>About Us</h2>
-    <p>
-      At <strong>XVII-17</strong>, we don’t just deliver websites — we craft
-      <em>experiences that inspire and drive results</em>.<br><br>
-      Every project reflects our commitment to excellence, creativity, and precision. XVII is not just a service; it's a standard. 
-      Whether you're starting fresh or scaling, our mission is to turn your vision into a premium, functional reality.
-    </p>
-  </section>
+<section class="about">
+  <h2>About Us</h2>
+  <p>
+    At <strong>XVII-17</strong>, we don’t just deliver websites — we craft <em>experiences that inspire, engage, and drive results</em>. Every project we undertake is an opportunity to merge creativity with precision, turning ideas into impactful digital realities.
+  </p>
+  <p>
+    Our team is dedicated to <strong>excellence, innovation, and quality</strong>. We dive deep into understanding your brand, your audience, and your goals, ensuring every website, application, or digital solution we create reflects your unique identity and speaks to your audience.
+  </p>
+  <p>
+    XVII-17 is more than a service — it’s a promise. A promise to provide <strong>cutting-edge designs, intuitive user experiences, and seamless functionality</strong>. Whether you’re launching a new venture, scaling your business, or refreshing your online presence, we are here to turn your vision into a premium, functional reality.
+  </p>
+  <p>
+    We specialize in crafting <strong>responsive websites, custom e-commerce platforms, and mobile applications</strong> that not only look stunning but also perform flawlessly across all devices. Every element, from color palettes to typography to interactive features, is carefully designed to captivate and engage users.
+  </p>
+  <p>
+    But we don’t stop at aesthetics. XVII-17 focuses on <strong>conversion-driven strategies, search engine optimization, and user-centered design</strong>, ensuring your digital presence drives meaningful results for your business. We combine creativity with strategy to make your brand stand out in a crowded digital landscape.
+  </p>
+  <p>
+    At XVII-17, collaboration is key. We work closely with you throughout the process, providing guidance, insights, and expertise while keeping your vision at the heart of everything we create. Our goal is to build digital solutions that are not only beautiful but also functional, scalable, and designed for long-term success.
+  </p>
+  <p>
+    With XVII-17, you’re not just getting a website; you’re getting a <strong>digital partner committed to your growth</strong>. From concept to launch and beyond, we ensure every project reflects our passion for innovation, quality, and results.
+  </p>
+</section>
 
-  <!-- SERVICES -->
+
   <section id="services" class="services">
     <h2>Our Services</h2>
     <div class="services-grid">
@@ -254,16 +248,15 @@
     </div>
   </section>
 
-  <!-- PORTFOLIO -->
   <section id="portfolio" class="gallery">
     <h2>Portfolio</h2>
     <div class="grid">
       <div class="card">
-        <img src="https://ts2.mm.bing.net/th?id=OIP.8iX4ahs9E1FfvxxNW4YyLQHaEr&pid=15.1" alt="Website Project">
+        <img src="https://colorlib.com/wp/wp-content/uploads/sites/2/travelix-free-template.jpg" alt="Website Project">
         <h3>Website Project</h3>
       </div>
       <div class="card">
-        <img src="https://thaka.bing.com/th/id/OIP.Jv8wYA-DHQCBGr6lOaMeJAHaEK?w=284&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="E-Commerce Store">
+        <img src="https://colorlib.com/wp/wp-content/uploads/sites/2/ezy-ecommerce-website-template.jpg" alt="E-Commerce Store">
         <h3>E-Commerce Store</h3>
       </div>
       <div class="card">
@@ -271,38 +264,59 @@
         <h3>Mobile App UI</h3>
       </div>
       <div class="card">
-        <img src="https://s3-alpha.figma.com/hub/file/4724852826/02e95015-7898-420a-9f55-5bba9df58025-cover.png" alt="SaaS Dashboard">
+        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/d74c4e148317675.62e747496adc8.jpg" alt="SaaS Dashboard">
         <h3>SaaS Dashboard</h3>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="contact">
-    <h2>Contact Us</h2>
-    <form>
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-    <div class="contact-info">
-      <p>📧 xviiventures@gmail.com</p>
-      <p>📞 +27 61 536 6792</p>
-      <p>📞 +27 81 514 3597</p>
-    </div>
+  <!-- Contact info moved here -->
+  <section id="contact">
+    <p>📧 xviiventures@gmail.com</p>
+    <p>📞 +27 61 536 6792</p>
+    <p>📞 +27 81 514 3597</p>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     © 2024 XVII-17 | Web Design & Development
   </footer>
 
-  <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/27615366792" class="whatsapp-float" target="_blank">
     <img src="https://thaka.bing.com/th/id/OIP.95AioEK2mw9lEDZutjLCegHaHa?w=179&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="WhatsApp">
   </a>
 
+  <script>
+    const phrases = [
+      "Modern Web Design & Development Solutions",
+      "Custom E-Commerce Stores",
+      "Responsive Mobile Applications",
+      "Premium UI/UX Experiences"
+    ];
+    let i = 0, j = 0;
+    const typingEl = document.getElementById("typing");
+
+    function type() {
+      if (j < phrases[i].length) {
+        typingEl.textContent += phrases[i][j];
+        j++;
+        setTimeout(type, 70);
+      } else {
+        setTimeout(erase, 2000);
+      }
+    }
+
+    function erase() {
+      if (j > 0) {
+        typingEl.textContent = phrases[i].substring(0,j-1);
+        j--;
+        setTimeout(erase, 40);
+      } else {
+        i = (i + 1) % phrases.length;
+        setTimeout(type, 500);
+      }
+    }
+
+    type();
+  </script>
 </body>
 </html>
-
